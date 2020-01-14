@@ -44,7 +44,7 @@
         <div class="chanel">
           <img src="https://mblogthumb-phinf.pstatic.net/20150626_22/vogos_zoe_1435304309215PEIsN_PNG/%BB%FE%B3%DA_No_%281%29.PNG?type=w2">
         </div>
-        <h3>샤넬n.5를 팝니다. <span class="pricetext">가격:200,000/100ml</span></h3>
+        <h3 id="shop_title">샤넬n.5를 팝니다. <span class="pricetext">가격:200,000/100ml</span></h3>
         <p>
           향은 몰라도 이름은 안들어본 사람이 없는 향수계의 수퍼스타죠.<br/>샤넬 향수의 대표적 상징, 샤넬 넘버5를 만나보세요!
         </p>
@@ -54,7 +54,7 @@
           <div class="input-group-prepend">
             <span class="input-group-text" id="basic-addon1">주문자 이름</span>
           </div>
-          <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+          <input type="text" class="form-control"  id="namename" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
         </div>
 
         <div class="input-group mb-3">
@@ -86,7 +86,7 @@
           <input type="text" class="form-control" placeholder="number" aria-label="Username" aria-describedby="basic-addon1">
         </div>
 
-        <button type="button" class="btn btn-primary">주문하기</button>
+        <button type="button" class="btn btn-primary" onClick="hey()">주문하기</button>
       </div>
     </div>
 
@@ -95,5 +95,14 @@
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+    <script>
+      let num = 0;
+      function hey(){
+        let name = $("#namename").val() //jQuery
+        alert(name + "님께 배송합니다");
+      }
+    </script>
+
   </body>
 </html>

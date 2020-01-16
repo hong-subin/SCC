@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+ <html lang="en">
+   <head>
+     <meta charset="utf-8" />
+     <meta
+       name="viewport"
+       content="width=device-width, initial-scale=1, shrink-to-fit=no"
+     />
+     <link
+       rel="stylesheet"
+       href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+       integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+       crossorigin="anonymous"
+     />
+     <title>Hello, world!</title>
+   </head>
+   <body>
+     <div class="input-group flex-nowrap">
+       <div class="input-group-prepend">
+         <span class="input-group-text" id="addon-wrapping">지역명</span>
+       </div>
+       <input
+         id="area_name"
+         type="text"
+         class="form-control"
+         placeholder="지역명을 입력하세요"
+         aria-label="Username"
+         aria-describedby="addon-wrapping"
+       />
+     </div>
+
+     <button type="button" class="btn btn-primary" onclick="get_data()">
+       찾기
+     </button>
+
+     <hr />
+
+     <ul id="output"></ul>
+
+     <script
+       src="https://code.jquery.com/jquery-3.4.1.min.js"
+       integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+       crossorigin="anonymous"
+     ></script>
+     <script
+       src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+       integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+       crossorigin="anonymous"
+     ></script>
+     <script
+       src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+       integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+       crossorigin="anonymous"
+     ></script>
+
+     <script>
+       function get_data() {
+         console.log("A");
+         $.ajax({
+           type: "GET",
+           url:
+             "http://openapi.seoul.go.kr:8088/6d4d776b466c656533356a4b4b5872/json/RealtimeCityAir/1/99",
+           data: {},
+           success: handleResponse
+         });
+       }
+
+       function handleResponse(response) {
+         let searchName = $("#area_name").val();
+
+         $("#output").html("");
+         for (let i = 0; i < response.RealtimeCityAir.list_total_count; i++) {
+           let row = response.RealtimeCityAir.row[i];
+           let name = row.MSRSTE_NM;
+           let pm10 = row.PM10;
+           let o3 = row.O3;
+
+           if (filter(searchName, row)) {
+             $("#output").append(`<li>${name} : PM10(${pm10}), O3:(${o3})</li>`);
+           }
+         }
+       }
+
+       function filter(name, row) {
+         if (name == "") return true;
+         let nm = row.MSRSTE_NM;
+         if (nm == name) return true;
+         return false;
+       }
+     </script>
+   </body>
+ </html>
